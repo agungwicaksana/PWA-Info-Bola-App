@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
+        <link rel="stylesheet" href="src/css/style.css">
+        <title>E-Bola</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!-- <link rel="apple-touch-icon" sizes="72x72" href="src/img/icons/icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="src/img/icons/icon-144x144.png" />
+        <link rel="apple-touch-icon" sizes="192" href="src/img/icons/icon-192x192.png" />
+        <link rel="icon" type="image/png" href="src/img/icons/icon-512x512.png" sizes="512x512" />
+        <link rel="icon" type="image/png" href="src/img/icons/icon-192x192.png" sizes="192x192" />
+        <link rel="icon" type="image/png" href="src/img/icons/icon-144x144.png" sizes="144x144" />
+        <link rel="icon" type="image/png" href="src/img/icons/icon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/png" href="src/img/icons/icon-72x72.png" sizes="72x72" /> -->
+        <!-- <link rel="manifest" href="manifest.json"> -->
+    </head>
+    <body>
+        <nav class="bg-theme">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="#!" class="brand-logo right">Soccerr</a>
+                    <a href="#" data-target="side-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                    <ul class="topnav left hide-on-med-and-down">
+                    </ul>
+                </div>
+            </div>
+        </nav>   
+        <ul class="sidenav" id="side-nav">
+        </ul>
+        
+        <div id="main-content"></div>
+
+        <footer class="page-footer bg-theme">
+                <div class="container">
+                    <div class="row">
+                        <div class="col l6 s12">
+                            <h5 class="white-text">Disclaimer</h5>
+                            <p class="white-text">Rancangan web ini dibuat untuk menyelesaikan submission project dari Dicoding dengan menerapkan teknologi Single Page App dan Progressive Web App</p>
+                            <p class="white-text">Aset gambar oleh Freepik</p>
+                        </div>
+                        <div class="col l4 offset-l2 s12">
+                            <h5 class="white-text">Links</h5>
+                            <ul id="footer-nav">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-copyright bg-theme-1">
+                    <div class="container center-align">
+                        &copy; 2020 Agung Wicaksana
+                    </div>
+                </div>
+        </footer>
+
+        <noscript>Mohon gunakan browser yang mendukung Javascript terbaru!</noscript>
+        <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+        <script type="text/javascript" src="src/component/nav.js"></script>
+        <script>
+            // if("serviceWorker" in navigator) {
+            //     window.addEventListener("load", () => {
+            //         navigator.serviceWorker.register("/service-worker.js")
+            //     });
+            // } else {
+            //     alert('Browser anda tidak kompatibel. Gunakan browser lain.')
+            // };
+        </script>
+
+        <script type="module" src="src/data/cl-2001.js"></script>
+    </body>
+</html>
