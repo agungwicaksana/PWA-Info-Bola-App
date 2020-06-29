@@ -44,3 +44,30 @@ h6 {font-size: .67em;}
 .white-box > * {
     margin: 0;
 }
+
+div.scrollmenu {
+    /* background-color: #333; */
+    overflow: auto;
+    white-space: nowrap;
+    scrollbar-width: none;  
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    color: #424242;
+    text-align: center;
+    padding: 9px 14px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 1300ms;
+}
+
+div.scrollmenu a:hover,
+div.scrollmenu a.active {
+    background-color: #f0f0f0;
+    transition: 1300ms;
+}
+
+.scrollmenu::-webkit-scrollbar {
+    display: none;
+}

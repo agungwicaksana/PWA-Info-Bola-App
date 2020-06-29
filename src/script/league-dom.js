@@ -29,6 +29,34 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
     `;
     html += headContent;
 
+    const groupList = [];
+    st.forEach(group => {
+        if(group.type.toUpperCase() === "TOTAL") {
+            groupList.push(group)
+        }
+    });
+
+    let linkGroup = '';
+    groupList.forEach(group => {
+        let groupName = group.group;
+        if(groupName !== null) {
+            groupName.replace('_', ' ');
+        } else if(groupName === null) {
+            groupName = 'GROUP';
+        };
+        linkGroup += `
+            <a href="#" data-group="${group.group}">${groupName}</a>
+        `;
+    })
+
+    const group = `
+        <div class="container">
+            <div class="scrollmenu mt10 mb10">
+                ${linkGroup}  
+            </div>
+        </div>
+    `
+    html += group;
 
     container.innerHTML = html
     console.log('cp', cp);
