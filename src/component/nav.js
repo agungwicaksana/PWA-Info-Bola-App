@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         const sidenav = document.querySelector('.sidenav');
                         M.Sidenav.getInstance(sidenav).close();
 
-                        page = event.target.getAttribute("href");
+                        page = event.target.getAttribute("href").substr(1);
                         loadPage(page);
                         (page === 'home') ? page='/': page=page;
                         window.history.pushState('','',page);
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
 
     // Handle nav-item on click
-    let page = window.location.hash;
+    let page = window.location.hash.substr(1);
     
     if (page === "") page = "home";
     loadPage(page);
