@@ -1,3 +1,5 @@
+import render from "../script/content-handler.js"
+
 document.addEventListener("DOMContentLoaded", function() {
     const elems = document.querySelectorAll(".sidenav");
     M.Sidenav.init(elems);
@@ -22,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         page = event.target.getAttribute("href").substr(1);
                         loadPage(page);
                         (page === 'home') ? page='/': page=page;
-                        window.history.pushState('','',page);
+                        window.history.pushState('','',`#${page}`);
                     })
                 })
             }
@@ -35,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Handle nav-item on click
     let page = window.location.hash.substr(1);
     
-    if (page === "") page = "home";
+    if (page === "") page = "2001";
     loadPage(page);
     function loadPage(page) {
         const xhttp = new XMLHttpRequest();
@@ -44,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const content = document.querySelector("#main-content");
                 if (this.status === 200) {
                     content.innerHTML = xhttp.responseText;
+                    render(page);
                 } else if (this.status === 403) {
                     document.innerHTML = showError('Anda Dilarang Mengakses Halaman Ini');
                 } else if (this.status === 404) {

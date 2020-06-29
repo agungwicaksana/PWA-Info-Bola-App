@@ -3,6 +3,7 @@
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css"  media="screen,projection"/>
+        <link rel="stylesheet" href="src/css/spacing.css">
         <link rel="stylesheet" href="src/css/style.css">
         <title>E-Bola</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -17,10 +18,10 @@
         <!-- <link rel="manifest" href="manifest.json"> -->
     </head>
     <body>
-        <nav class="bg-theme">
+        <nav class="light-blue darken-3">
             <div class="container">
                 <div class="nav-wrapper">
-                    <a href="#!" class="brand-logo left">Soccerr</a>
+                    <a href="" class="brand-logo left">Soccerr</a>
                     <a href="#" data-target="side-nav" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
                     <ul class="topnav right hide-on-med-and-down">
                     </ul>
@@ -32,7 +33,7 @@
         
         <div id="main-content"></div>
 
-        <footer class="page-footer bg-theme">
+        <footer class="page-footer light-blue darken-3">
                 <div class="container">
                     <div class="row">
                         <div class="col l6 s12">
@@ -47,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="footer-copyright bg-theme-1">
+                <div class="footer-copyright light-blue darken-4">
                     <div class="container center-align">
                         &copy; 2020 Agung Wicaksana
                     </div>
@@ -57,7 +58,8 @@
         <noscript>Mohon gunakan browser yang mendukung Javascript terbaru!</noscript>
         <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
-        <script type="text/javascript" src="src/component/nav.js"></script>
+        <script type="module" src="src/component/nav.js"></script>
+        <!-- <script type="text/javascript" src="src/script/content-handler.js"></script> -->
         <script>
             // if("serviceWorker" in navigator) {
             //     window.addEventListener("load", () => {
@@ -68,6 +70,6 @@
             // };
         </script>
 
-        <script type="module" src="src/data/cl-2001.js"></script>
+        <!-- <script type="module" src="src/data/cl-2001.js"></script> -->
     </body>
 </html>
