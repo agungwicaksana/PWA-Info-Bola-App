@@ -40,12 +40,12 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
     groupList.forEach(group => {
         let groupName = group.group;
         if(groupName !== null) {
-            groupName.replace('_', ' ');
+            groupName = groupName.replace('_', ' ');
         } else if(groupName === null) {
-            groupName = 'GROUP';
+            return;
         };
         linkGroup += `
-            <a href="#" data-group="${group.group}">${groupName}</a>
+            <a href="#" class="group-link waves-effect" data-group="${group.group}">${groupName}</a>
         `;
     })
 
@@ -55,7 +55,11 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
                 ${linkGroup}  
             </div>
         </div>
-    `
+        <div class="container">
+            <div class="row" id="teams-container">
+            </div>
+        </div>
+    `;
     html += group;
 
     container.innerHTML = html
@@ -63,4 +67,32 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
     console.log('se', se);
     console.log('st', st);
     
+    const groupLinks = document.querySelectorAll('.group-link');
+    groupLinks.forEach(link => {
+        link.addEventListener('click',e => {
+            e.preventDefault();
+            groupLinks.forEach(lnk => {
+                lnk.classList.remove('active');
+            })
+            e.target.classList.add('active');
+            const groupDataSet = e.target.dataset.group;
+            // console.log('e', e.target)
+            // console.log('dataset', groupDataSet)
+            groupList.forEach(group => {
+                if(group.group === groupDataSet) {
+                    // console.log('group',)
+                    const teamsContainer = document.getElementById('teams-container');
+                    let teams = '';
+                    group.table.forEach(team => {
+                        teams += `
+                            <div class="col s12 m10 l8 offset-m1 offset-l2">
+                                // Disini akan ditambahkan kartu untuk menampung data team
+                            </div>
+                        `;
+                    });
+                    teamsContainer.innerHTML = teams;
+                };
+            });
+        })
+    })
 }
