@@ -1,3 +1,5 @@
+import urlRplc from "./url-https.js";
+
 export default function leagueDOM({competition: cp, season: se, standings: st}){
     const time = cp.lastUpdated;
 
@@ -76,8 +78,6 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
             })
             e.target.classList.add('active');
             const groupDataSet = e.target.dataset.group;
-            // console.log('e', e.target)
-            // console.log('dataset', groupDataSet)
             groupList.forEach(group => {
                 if(group.group === groupDataSet) {
                     // console.log('group',)
@@ -86,7 +86,31 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
                     group.table.forEach(team => {
                         teams += `
                             <div class="col s12 m10 l8 offset-m1 offset-l2">
-                                // Disini akan ditambahkan kartu untuk menampung data team
+                                <div class="team-item waves-effect">
+                                    <img src="${urlRplc(team.team.crestUrl)}" alt="Logo ${team.team.name}">
+                                    <div class="team-item-content">
+                                        <span class="badge bdg-color-${team.position}">${team.position}</span>
+                                        <span>${team.team.name}</span>
+                                        <hr/>
+                                        <div>
+                                            <span class="stat teal-text">
+                                                ${team.playedGames}<span> Games</span>
+                                            </span>
+                                            <span class="stat teal-text">
+                                                ${team.won}<span> Won</span>
+                                            </span>
+                                            <span class="stat orange-text">
+                                                ${team.draw}<span> Draw</span>
+                                            </span>
+                                            <span class="stat red-text">
+                                                ${team.lost}<span> Lost</span>
+                                            </span>
+                                            <span class="stat badge black-text">
+                                                ${team.points}<span>pts</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         `;
                     });
