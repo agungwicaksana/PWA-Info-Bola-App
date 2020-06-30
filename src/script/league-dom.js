@@ -47,7 +47,7 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
             return;
         };
         linkGroup += `
-            <a href="#" class="group-link waves-effect" data-group="${group.group}">${groupName}</a>
+            <a href="#" id="btn_${group.group}" class="group-link waves-effect" data-group="${group.group}">${groupName}</a>
         `;
     })
 
@@ -80,43 +80,61 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
             const groupDataSet = e.target.dataset.group;
             groupList.forEach(group => {
                 if(group.group === groupDataSet) {
-                    // console.log('group',)
-                    const teamsContainer = document.getElementById('teams-container');
-                    let teams = '';
-                    group.table.forEach(team => {
-                        teams += `
-                            <div class="col s12 m10 l8 offset-m1 offset-l2">
-                                <div class="team-item waves-effect">
-                                    <img src="${urlRplc(team.team.crestUrl)}" alt="Logo ${team.team.name}">
-                                    <div class="team-item-content">
-                                        <span class="badge bdg-color-${team.position}">${team.position}</span>
-                                        <span>${team.team.name}</span>
-                                        <hr/>
-                                        <div>
-                                            <span class="stat teal-text">
-                                                ${team.playedGames}<span> Games</span>
-                                            </span>
-                                            <span class="stat teal-text">
-                                                ${team.won}<span> Won</span>
-                                            </span>
-                                            <span class="stat orange-text">
-                                                ${team.draw}<span> Draw</span>
-                                            </span>
-                                            <span class="stat red-text">
-                                                ${team.lost}<span> Lost</span>
-                                            </span>
-                                            <span class="stat badge black-text">
-                                                ${team.points}<span>pts</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    teamsContainer.innerHTML = teams;
+                    groupDOM(group);
                 };
             });
         })
     })
+
+    function groupDOM(group) {  
+        const teamsContainer = document.getElementById('teams-container');
+        // console.log('group', group)
+        let teams = '';
+        group.table.forEach(team => {
+            let color = team.position;
+            if(color >= 4) {
+                color = 4
+            };
+            teams += `
+                <div class="col s12 m10 l8 offset-m1 offset-l2">
+                    <div class="team-item waves-effect">
+                        <img src="${urlRplc(team.team.crestUrl)}" alt="Logo ${team.team.name}">
+                        <div class="team-item-content">
+                            <span class="badge bdg-color-${color}">${team.position}</span>
+                            <span>${team.team.name}</span>
+                            <hr/>
+                            <div>
+                                <span class="stat teal-text">
+                                    ${team.playedGames}<span> Games</span>
+                                </span>
+                                <span class="stat teal-text">
+                                    ${team.won}<span> Won</span>
+                                </span>
+                                <span class="stat orange-text">
+                                    ${team.draw}<span> Draw</span>
+                                </span>
+                                <span class="stat red-text">
+                                    ${team.lost}<span> Lost</span>
+                                </span>
+                                <span class="stat badge black-text">
+                                    ${team.points}<span>pts</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        teamsContainer.innerHTML = teams;
+
+        if(group.group !== null) {
+            if(group.group.toUpperCase() === 'GROUP_A') {
+                const btn_A = document.getElementById('btn_GROUP_A');
+                btn_A.classList.add('active');
+            };
+        };
+    };
+
+    // onPageLoaded
+    groupDOM(groupList[0])
 }
