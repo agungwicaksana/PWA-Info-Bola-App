@@ -128,3 +128,8 @@ span.badge {
 .bdg-color-4 {
     background-color: #bf360c;
 }
+
+/* Footer */
+footer li a {
+    color: #fff;
+}
