@@ -3,7 +3,7 @@ import urlRplc from "./url-https.js";
 export default function leagueDOM({competition: cp, season: se, standings: st}){
     const time = cp.lastUpdated;
 
-    const container = document.getElementById(`${cp.id}-container`);
+    const container = document.getElementById(`league-container`);
     let html = '';
     const headContent = `
         <div class="light-blue darken-3">

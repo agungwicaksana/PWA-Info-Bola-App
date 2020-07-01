@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         page = event.target.getAttribute("href").substr(1);
                         loadPage(page);
-                        (page === 'home') ? page='/': page=page;
                         window.history.pushState('','',`#${page}`);
                     })
                 })
@@ -37,9 +36,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // Handle nav-item on click
     let page = window.location.hash.substr(1);
     
-    if (page === "") page = "2001";
+    if (page === "") page = "league/2001";
     loadPage(page);
-    function loadPage(page) {
+    function loadPage(pg) {
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4) {
@@ -56,7 +55,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
         };
-        xhttp.open("GET", "src/html/" + page + ".html", true);
+        if(pg.slice(0,6) === 'league') { 
+            pg = 'league'
+        };
+        xhttp.open("GET", "src/html/" + pg + ".html", true);
         xhttp.send();
     };
 
