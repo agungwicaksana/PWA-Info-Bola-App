@@ -10,13 +10,14 @@ document.addEventListener("DOMContentLoaded", function() {
         xhttp.onreadystatechange = function() {
             if (this.readyState === 4) {
                 if (this.status !== 200) return;
-                
-                document.querySelectorAll(".topnav, .sidenav, #footer-nav").forEach(e => {
+                const targets = '.topnav, .sidenav, #footer-nav';
+                document.querySelectorAll(targets).forEach(e => {
                     e.innerHTML = xhttp.responseText;
                 });
 
-                document.querySelectorAll('.sidenav a, .topnav a, #footer-nav a').forEach(e => {
+                document.querySelectorAll(targets).forEach(e => {
                     e.addEventListener("click", event => {
+                        console.log('event',event)
                         event.preventDefault()
                         const sidenav = document.querySelector('.sidenav');
                         M.Sidenav.getInstance(sidenav).close();
@@ -56,7 +57,9 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         };
         if(pg.slice(0,6) === 'league') { 
-            pg = 'league'
+            pg = 'league';
+        } else if(pg.slice(0,4) === 'team') {
+            pg = 'team';
         };
         xhttp.open("GET", "src/html/" + pg + ".html", true);
         xhttp.send();

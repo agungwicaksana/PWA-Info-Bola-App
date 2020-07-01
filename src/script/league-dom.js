@@ -1,4 +1,5 @@
 import urlRplc from "./url-https.js";
+import render from "./content-handler.js";
 
 export default function leagueDOM({competition: cp, season: se, standings: st}){
     const time = cp.lastUpdated;
@@ -96,33 +97,35 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
                 color = 4
             };
             teams += `
-                <div class="col s12 m10 l8 offset-m1 offset-l2">
-                    <div class="team-item waves-effect">
-                        <img src="${urlRplc(team.team.crestUrl)}" alt="Logo ${team.team.name}">
-                        <div class="team-item-content">
-                            <span class="badge bdg-color-${color}">${team.position}</span>
-                            <span>${team.team.name}</span>
-                            <hr/>
-                            <div>
-                                <span class="stat teal-text">
-                                    ${team.playedGames}<span> Games</span>
-                                </span>
-                                <span class="stat teal-text">
-                                    ${team.won}<span> Won</span>
-                                </span>
-                                <span class="stat orange-text">
-                                    ${team.draw}<span> Draw</span>
-                                </span>
-                                <span class="stat red-text">
-                                    ${team.lost}<span> Lost</span>
-                                </span>
-                                <span class="stat badge black-text">
-                                    ${team.points}<span>pts</span>
-                                </span>
+                <a href="#team/${team.team.id}" class="team-detail">
+                    <div class="col s12 m10 l8 offset-m1 offset-l2">
+                        <div class="team-item waves-effect">
+                            <img src="${urlRplc(team.team.crestUrl)}" alt="Logo ${team.team.name}">
+                            <div class="team-item-content">
+                                <span class="badge bdg-color-${color}">${team.position}</span>
+                                <span>${team.team.name}</span>
+                                <hr/>
+                                <div>
+                                    <span class="stat teal-text">
+                                        ${team.playedGames}<span> Games</span>
+                                    </span>
+                                    <span class="stat teal-text">
+                                        ${team.won}<span> Won</span>
+                                    </span>
+                                    <span class="stat orange-text">
+                                        ${team.draw}<span> Draw</span>
+                                    </span>
+                                    <span class="stat red-text">
+                                        ${team.lost}<span> Lost</span>
+                                    </span>
+                                    <span class="stat badge black-text">
+                                        ${team.points}<span>pts</span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             `;
         });
         teamsContainer.innerHTML = teams;
@@ -137,4 +140,41 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
 
     // onPageLoaded
     groupDOM(groupList[0])
+
+    // Add page redirect on team card
+    function loadPage(pg) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4) {
+                const content = document.querySelector("#main-content");
+                if (this.status === 200) {
+                    content.innerHTML = xhttp.responseText;
+                    render(page);
+                } else if (this.status === 403) {
+                    document.innerHTML = showError('Anda Dilarang Mengakses Halaman Ini');
+                } else if (this.status === 404) {
+                    content.innerHTML = showError('Halaman Tidak Ditemukan');
+                } else {
+                    content.innerHTML = showError('Halaman Tidak Dapat Diakses');
+                }
+            }
+        };
+        if(pg.slice(0,6) === 'league') { 
+            pg = 'league';
+        } else if(pg.slice(0,4) === 'team') {
+            pg = 'team';
+        };
+        xhttp.open("GET", "src/html/" + pg + ".html", true);
+        xhttp.send();
+    };
+
+    const teamsDetailBtn = document.querySelectorAll('.team-detail');
+    teamsDetailBtn.forEach(btn => {
+        btn.addEventListener('click',(e) => {
+            e.preventDefault();
+            const teamId = btn.getAttribute('href').substr(1);
+            console.log(teamId)
+            loadPage(teamId)
+        })
+    });
 }
