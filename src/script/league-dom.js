@@ -23,7 +23,7 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
                         </div>
                     </div>
                     <div class="col s12 l10 left-align left">
-                        <p class="info"><b>Updated:</b> ${time.substring(0,10)} at ${time.substring(11,16)} GMT</p>
+                        <p class="info"><b>Updated:</b> ${time.substring(0,10)} at ${time.substring(11,16)} UTC</p>
                         <p class="info"><b>Event Ends:</b> ${se.endDate}</p>
                     </div>
                 </div>

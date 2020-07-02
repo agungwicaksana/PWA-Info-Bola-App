@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 document.querySelectorAll(targets).forEach(e => {
                     e.addEventListener("click", event => {
-                        console.log('event',event)
                         event.preventDefault()
                         const sidenav = document.querySelector('.sidenav');
                         M.Sidenav.getInstance(sidenav).close();

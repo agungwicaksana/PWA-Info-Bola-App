@@ -12,6 +12,11 @@ h6 {font-size: .67em;}
     align-items: flex-end;
 }
 
+.my0 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
 @media (max-width: 600px) {
     .s-center-align {
         text-align: center !important;
@@ -21,6 +26,10 @@ h6 {font-size: .67em;}
     }
     .s-flex-center {
         justify-content: center;
+    }
+    .align-items-end {
+        align-items: flex-start;
+        height: fit-content !important;
     }
 }
 
@@ -142,3 +151,8 @@ img.materialboxed {
     width: 100%;
     max-width: 200px;
 }
+
+.team-detail {
+    min-height: 180px;
+}
+
