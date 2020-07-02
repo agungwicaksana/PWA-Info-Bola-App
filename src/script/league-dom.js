@@ -159,12 +159,13 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
                 }
             }
         };
+        let page;
         if(pg.slice(0,6) === 'league') { 
-            pg = 'league';
+            page = 'league';
         } else if(pg.slice(0,4) === 'team') {
-            pg = 'team';
+            page = 'team';
         };
-        xhttp.open("GET", "src/html/" + pg + ".html", true);
+        xhttp.open("GET", "src/html/" + page + ".html", true);
         xhttp.send();
     };
 
