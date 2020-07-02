@@ -66,9 +66,9 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
     html += group;
 
     container.innerHTML = html
-    console.log('cp', cp);
-    console.log('se', se);
-    console.log('st', st);
+    // console.log('cp', cp);
+    // console.log('se', se);
+    // console.log('st', st);
     
     const groupLinks = document.querySelectorAll('.group-link');
     groupLinks.forEach(link => {
@@ -149,7 +149,7 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
                 const content = document.querySelector("#main-content");
                 if (this.status === 200) {
                     content.innerHTML = xhttp.responseText;
-                    render(page);
+                    render(pg);
                 } else if (this.status === 403) {
                     document.innerHTML = showError('Anda Dilarang Mengakses Halaman Ini');
                 } else if (this.status === 404) {
@@ -173,7 +173,7 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
         btn.addEventListener('click',(e) => {
             e.preventDefault();
             const teamId = btn.getAttribute('href').substr(1);
-            console.log(teamId)
+            // console.log(teamId)
             loadPage(teamId)
         })
     });
