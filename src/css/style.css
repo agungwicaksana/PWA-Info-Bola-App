@@ -8,6 +8,9 @@ h6 {font-size: .67em;}
 .flex-end {
     justify-content: flex-end;
 }
+.align-items-end {
+    align-items: flex-end;
+}
 
 @media (max-width: 600px) {
     .s-center-align {
@@ -132,4 +135,10 @@ span.badge {
 /* Footer */
 footer li a {
     color: #fff;
+}
+
+/* Material boxed */
+img.materialboxed {
+    width: 100%;
+    max-width: 200px;
 }

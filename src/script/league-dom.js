@@ -150,6 +150,7 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
                 if (this.status === 200) {
                     content.innerHTML = xhttp.responseText;
                     render(pg);
+                    window.history.pushState('','',`#${pg}`);
                 } else if (this.status === 403) {
                     document.innerHTML = showError('Anda Dilarang Mengakses Halaman Ini');
                 } else if (this.status === 404) {
