@@ -172,3 +172,15 @@ img.materialboxed {
     transform: scale(1.5);
     transition: 600ms;
 }
+
+/* Preloader */
+.preloader-container {
+    margin: 110px 0;
+    padding: 20px 0;
+}
+
+/* Coba lagi */
+.coba-lagi {
+    cursor: pointer;
+    color: #039be5;
+}
