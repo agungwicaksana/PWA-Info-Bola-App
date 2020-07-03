@@ -1,4 +1,5 @@
 import urlRplc from "./url-https.js";
+import render from "./content-handler.js"
 
 export default function teamDOM(data) {
     const { id, name, shortName, tla,
@@ -166,12 +167,12 @@ export default function teamDOM(data) {
     brandLogo.classList.remove('left');
     brandLogo.classList.add('center');
 
-    // Add back button
+    // Add backBtn
     const aTag = document.createElement('a');
     aTag.innerHTML = '<i class="material-icons left rem-23 pt-4 back-btn">close</i>';
     navWrapper.appendChild(aTag);
 
-    // Fungsi pada btn save
+    // Fungsi pada saveBtn
     const btnSave = document.querySelector('.btn-save');
     btnSave.addEventListener('click', e => {
         e.preventDefault();
@@ -185,4 +186,50 @@ export default function teamDOM(data) {
             // hapus data dari indexed db
         };
     })
+
+    // Fungsi pada back backBtn
+    const btnBack = document.querySelector('.back-btn');
+    btnBack.addEventListener('click',e => {
+        e.preventDefault();
+        history.back()
+
+        const backPageInt = setInterval(() => {
+            let prevUrl = window.location.href;
+            prevUrl = prevUrl.split('#')[1];
+            if(prevUrl.substr(0,4) !== 'team') {
+                clearInterval(backPageInt);
+            };
+            loadPage(prevUrl,prevUrl);
+            // console.log('window.location.href',window.location.href);
+            // console.log('prevUrl',prevUrl);
+        }, 50);
+        // Benerin menu, kembali ke semula
+        
+    })
+
+    function loadPage(pg, page) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4) {
+                const content = document.querySelector("#main-content");
+                if (this.status === 200) {
+                    content.innerHTML = xhttp.responseText;
+                    render(page);
+                } else if (this.status === 403) {
+                    document.innerHTML = showError('Anda Dilarang Mengakses Halaman Ini');
+                } else if (this.status === 404) {
+                    content.innerHTML = showError('Halaman Tidak Ditemukan');
+                } else {
+                    content.innerHTML = showError('Halaman Tidak Dapat Diakses');
+                }
+            }
+        };
+        if(pg.slice(0,6) === 'league') { 
+            pg = 'league';
+        } else if(pg.slice(0,4) === 'team') {
+            pg = 'team';
+        };
+        xhttp.open("GET", "src/html/" + pg + ".html", true);
+        xhttp.send();
+    };
 }
