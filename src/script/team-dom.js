@@ -192,7 +192,7 @@ export default function teamDOM(data) {
     btnBack.addEventListener('click',e => {
         e.preventDefault();
         history.back()
-
+        let page = '';
         const backPageInt = setInterval(() => {
             let prevUrl = window.location.href;
             prevUrl = prevUrl.split('#')[1];
@@ -200,12 +200,48 @@ export default function teamDOM(data) {
                 clearInterval(backPageInt);
             };
             loadPage(prevUrl,prevUrl);
-            // console.log('window.location.href',window.location.href);
-            // console.log('prevUrl',prevUrl);
+            page = prevUrl;
+            if(prevUrl.substr(0,6) === 'league') {
+                // Benerin menu, kembali ke semula
+                navWrapper.innerHTML = `
+                    <a href="" class="brand-logo left">Soccerrr</a>
+                    <a href="#" data-target="side-nav" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+                    <ul class="topnav right hide-on-med-and-down">
+                    </ul>
+                `;
+                console.log('page', page)
+                loadNav(page);
+            };
         }, 50);
-        // Benerin menu, kembali ke semula
-        
     })
+
+    function loadNav(page) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4) {
+                if (this.status !== 200) return;
+                const targets = '.topnav, .sidenav, #footer-nav';
+                document.querySelectorAll(targets).forEach(e => {
+                    e.innerHTML = xhttp.responseText;
+                });
+
+                document.querySelectorAll(targets).forEach(e => {
+                    e.addEventListener("click", event => {
+                        event.preventDefault()
+                        const sidenav = document.querySelector('.sidenav');
+                        M.Sidenav.getInstance(sidenav).close();
+
+                        page = event.target.getAttribute("href").substr(1);
+                        // console.log('page', event.target)
+                        loadPage(page, page);
+                        window.history.pushState('','',`#${page}`);
+                    })
+                })
+            }
+        };
+        xhttp.open("GET", "src/html/nav.html", true);
+        xhttp.send();
+    };
 
     function loadPage(pg, page) {
         const xhttp = new XMLHttpRequest();
