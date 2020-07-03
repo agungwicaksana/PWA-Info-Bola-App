@@ -148,15 +148,18 @@ export default function teamDOM(data) {
     const teamDetail = document.querySelector('.team-detail');
     teamDetail.style.minHeight = `${logoCol.offsetHeight}px`;
 
-    // Change navbar
+    // Change navbar to Empty
     const navbarTeam = document.querySelectorAll('.topnav, .sidenav-trigger');
     navbarTeam.forEach(nav => {
-        nav.innerHTML = `
-                <a href="#save">
-                    <i class="rem-23 pt-4 material-icons">star_border</i>
-                </a>
-        `;
+        nav.remove();
     });
+
+    // Add saveBtn
+    const navWrapper = document.querySelector('.nav-wrapper');
+    const saveBtn = document.createElement('a');
+    saveBtn.classList.add('right')
+    saveBtn.innerHTML = '<i class="rem-23 pt-4 material-icons btn-save">star_border</i>';
+    navWrapper.appendChild(saveBtn);
 
     // Move brand logo to center
     const brandLogo = document.querySelector('.brand-logo');
@@ -164,8 +167,15 @@ export default function teamDOM(data) {
     brandLogo.classList.add('center');
 
     // Add back button
-    const navWrapper = document.querySelector('.nav-wrapper');
     const aTag = document.createElement('a');
-    aTag.innerHTML = '<i class="material-icons left rem-23 pt-4">close</i>';
+    aTag.innerHTML = '<i class="material-icons left rem-23 pt-4 back-btn">close</i>';
     navWrapper.appendChild(aTag);
+
+    // Fungsi pada btn save
+    const btnSave = document.querySelector('.btn-save');
+    btnSave.addEventListener('click', e => {
+        e.preventDefault();
+        btnSave.innerHTML = 'star';
+        console.log('clicked')
+    })
 }

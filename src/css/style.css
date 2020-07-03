@@ -160,3 +160,15 @@ img.materialboxed {
     min-height: 180px;
 }
 
+/* Back button & save button*/
+.back-btn,
+.btn-save {
+    cursor: pointer;
+    transform: scale(1);
+    transition: 600ms;
+}
+.back-btn:hover,
+.btn-save:hover {
+    transform: scale(1.5);
+    transition: 600ms;
+}
