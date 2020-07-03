@@ -100,7 +100,7 @@ export default function teamDOM(data) {
         };
         trSquad += `
             <tr>
-                <td>${shirtNumber}</td>
+                <td class="center-align">${shirtNumber}</td>
                 <td>${p.name}</td>
                 <td>${p.position}</td>
                 <td>${p.nationality}</td>
@@ -120,7 +120,7 @@ export default function teamDOM(data) {
                     <table class="striped responsive-table">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th class="center-align">#</th>
                                 <th>Name</th>
                                 <th>Pos</th>
                                 <th>Nat</th>
@@ -142,8 +142,30 @@ export default function teamDOM(data) {
     // Init Materialboxed
     const MBoxed = document.querySelectorAll('.materialboxed');
     M.Materialbox.init(MBoxed);
+
     // adjust DOM
     const logoCol = document.querySelector('.logo-col');
     const teamDetail = document.querySelector('.team-detail');
     teamDetail.style.minHeight = `${logoCol.offsetHeight}px`;
+
+    // Change navbar
+    const navbarTeam = document.querySelectorAll('.topnav, .sidenav-trigger');
+    navbarTeam.forEach(nav => {
+        nav.innerHTML = `
+                <a href="#save">
+                    <i class="rem-23 pt-4 material-icons">star_border</i>
+                </a>
+        `;
+    });
+
+    // Move brand logo to center
+    const brandLogo = document.querySelector('.brand-logo');
+    brandLogo.classList.remove('left');
+    brandLogo.classList.add('center');
+
+    // Add back button
+    const navWrapper = document.querySelector('.nav-wrapper');
+    const aTag = document.createElement('a');
+    aTag.innerHTML = '<i class="material-icons left rem-23 pt-4">close</i>';
+    navWrapper.appendChild(aTag);
 }

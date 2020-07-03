@@ -4,6 +4,10 @@ h3 {font-size: 1.17em;}
 h4 {font-size: 1em;}
 h5 {font-size: .83em;}
 h6 {font-size: .67em;}
+.rem-23 {
+    font-size: 2.3rem !important;
+}
+.pt-4 {padding-top: 4px !important;}
 
 .flex-end {
     justify-content: flex-end;
