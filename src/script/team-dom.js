@@ -175,7 +175,14 @@ export default function teamDOM(data) {
     const btnSave = document.querySelector('.btn-save');
     btnSave.addEventListener('click', e => {
         e.preventDefault();
-        btnSave.innerHTML = 'star';
-        console.log('clicked')
+        if(btnSave.innerHTML === 'star_border') {
+            btnSave.innerHTML = 'star';
+            M.toast({html: `${shortName} difavoritkan`})
+            // simpan data ke indexedDb. data di parameter fungsi ini
+        } else {
+            btnSave.innerHTML = 'star_border'
+            M.toast({html: `${shortName} dihapus dari favorit`})
+            // hapus data dari indexed db
+        };
     })
 }
