@@ -12,6 +12,7 @@ export function fetchStanding(league_id) {
             return resJson
         })
         .catch(error => {
+            M.toast({html: error})
             return error
         })
 };
@@ -26,6 +27,7 @@ export function fetchTeam(team_id) {
             return resJson
         })
         .catch(error => {
+            M.toast({html: error})
             return error
         })
 };
