@@ -204,12 +204,11 @@ export default function teamDOM(data) {
             if(prevUrl.substr(0,6) === 'league') {
                 // Benerin menu, kembali ke semula
                 navWrapper.innerHTML = `
-                    <a href="" class="brand-logo left">Soccerrr</a>
+                    <a href="#league-2001" class="brand-logo left">Soccerrr</a>
                     <a href="#" data-target="side-nav" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
                     <ul class="topnav right hide-on-med-and-down">
                     </ul>
                 `;
-                console.log('page', page)
                 loadNav(page);
             };
         }, 50);
@@ -230,9 +229,7 @@ export default function teamDOM(data) {
                         event.preventDefault()
                         const sidenav = document.querySelector('.sidenav');
                         M.Sidenav.getInstance(sidenav).close();
-
                         page = event.target.getAttribute("href").substr(1);
-                        // console.log('page', event.target)
                         loadPage(page, page);
                         window.history.pushState('','',`#${page}`);
                     })

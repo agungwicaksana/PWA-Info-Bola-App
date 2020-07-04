@@ -136,6 +136,7 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
                 btn_A.classList.add('active');
             };
         };
+        teamEventListener();
     };
 
     // onPageLoaded
@@ -170,13 +171,15 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
         xhttp.send();
     };
 
-    const teamsDetailBtn = document.querySelectorAll('.team-detail');
-    teamsDetailBtn.forEach(btn => {
-        btn.addEventListener('click',(e) => {
-            e.preventDefault();
-            const teamId = btn.getAttribute('href').substr(1);
-            // console.log(teamId)
-            loadPage(teamId)
-        })
-    });
+    function teamEventListener() {  
+        const teamsDetailBtn = document.querySelectorAll('.team-detail');
+        teamsDetailBtn.forEach(btn => {
+            btn.addEventListener('click',(e) => {
+                e.preventDefault();
+                const teamId = btn.getAttribute('href').substr(1);
+                // console.log(teamId)
+                loadPage(teamId)
+            })
+        });
+    }
 }

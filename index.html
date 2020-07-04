@@ -21,7 +21,7 @@
         <nav class="light-blue darken-3">
             <div class="container">
                 <div class="nav-wrapper">
-                    <a href="" class="brand-logo left">Soccerrr</a>
+                    <a href="#league-2001" class="brand-logo left">Soccerrr</a>
                     <a href="#" data-target="side-nav" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
                     <ul class="topnav right hide-on-med-and-down">
                     </ul>
@@ -69,6 +69,18 @@
             // } else {
             //     alert('Browser anda tidak kompatibel. Gunakan browser lain.')
             // };
+            if (!("serviceWorker" in navigator)) {
+                console.error("ServiceWorker: Browser tidak mendukung")
+            } else {
+                navigator.serviceWorker
+                    .register("service-worker.js")
+                    .then(function(registration) {
+                        console.log("ServiceWorker: Pendaftaran berhasil. Scope: ", registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.log("ServiceWorker: Pendaftaran Gagal. Error: ", error);
+                    })
+            }
         </script>
 
         <!-- <script type="module" src="src/data/cl-2001.js"></script> -->
