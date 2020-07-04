@@ -83,7 +83,7 @@ export default function teamDOM(data) {
             </div>
             <div class="row my0">
                 <div class="col s4 m10 l4 offset-m1 offset-l2">
-                    Last Udpate
+                    Last Update
                 </div>
                 <div class="col s8 m6 l4 right-align">
                     ${lastUpdated.substring(0,10)} at ${lastUpdated.substring(11,16)} UTC
