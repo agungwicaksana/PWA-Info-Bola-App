@@ -36,7 +36,16 @@ document.addEventListener("DOMContentLoaded", function() {
     // Handle nav-item on click
     let page = window.location.hash.substr(1);
     
-    if (page === "") page = "league/2001";
+    if (page === "") {
+        page = "league/2001"
+        window.history.pushState('','',`#${page}`);
+        const ivalReload = setInterval(() => {
+            if(window.location.hash === `#${page}`) {
+                location.reload();
+                clearInterval(ivalReload);
+            }
+        }, 50);
+    };
     loadPage(page);
     function loadPage(pg) {
         const xhttp = new XMLHttpRequest();

@@ -60,29 +60,6 @@
         <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
         <script type="module" src="src/component/nav.js"></script>
-        <!-- <script type="text/javascript" src="src/script/content-handler.js"></script> -->
-        <script>
-            // if("serviceWorker" in navigator) {
-            //     window.addEventListener("load", () => {
-            //         navigator.serviceWorker.register("/service-worker.js")
-            //     });
-            // } else {
-            //     alert('Browser anda tidak kompatibel. Gunakan browser lain.')
-            // };
-            if (!("serviceWorker" in navigator)) {
-                console.error("ServiceWorker: Browser tidak mendukung")
-            } else {
-                navigator.serviceWorker
-                    .register("service-worker.js")
-                    .then(function(registration) {
-                        console.log("ServiceWorker: Pendaftaran berhasil. Scope: ", registration.scope);
-                    })
-                    .catch(function(error) {
-                        console.log("ServiceWorker: Pendaftaran Gagal. Error: ", error);
-                    })
-            }
-        </script>
-
-        <!-- <script type="module" src="src/data/cl-2001.js"></script> -->
+        <script src="register-sw.js"></script>
     </body>
 </html>

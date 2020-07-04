@@ -2,19 +2,20 @@ const CACHE_NAME = "submission-v2";
 const urlsToCache = [
     "/",
     "/index.html",
+    "/register-sw.js",
     "/node_modules/jquery/dist/jquery.min.js",
     "/node_modules/materialize-css/dist/js/materialize.min.js",
     "/src/component/nav.js",
     "/src/css/spacing.css",
     "/src/css/style.css",
-    "/src/data/standing-api.js",
+    "/src/data/standings-api.js",
     "/src/html/league.html",
     "/src/html/nav.html",
     "/src/html/team.html",
     "/src/script/content-handler.js",
     "/src/script/league-dom.js",
     "/src/script/team-dom.js",
-    "/src/script/url-https",
+    "/src/script/url-https.js",
     "https://fonts.googleapis.com/icon?family=Material+Icons"
 ];
 
@@ -50,33 +51,56 @@ self.addEventListener("install", function(event) {
 //     )
 // })
 
-// Versi 2. Pendaftarn cache secara dinamis
-self.addEventListener("fetch", function(event) {  
-    event.respondWith(
-        caches.match(event.request, {cacheName: CACHE_NAME})
-            .then(function(response) {
-                if(response) {
-                    return response
-                }
+// // Versi 2. Pendaftarn cache secara dinamis
+// self.addEventListener("fetch", function(event) {  
+//     event.respondWith(
+//         caches.match(event.request, {cacheName: CACHE_NAME})
+//             .then(function(response) {
+//                 if(response) {
+//                     return response
+//                 }
 
-                var fetchRequest = event.request.clone();
+//                 var fetchRequest = event.request.clone();
 
-                return fetch(fetchRequest)
-                    .then(function (response) {
-                        if(!response || response.status !== 200) {
-                            return response;
-                        }
+//                 return fetch(fetchRequest)
+//                     .then(function (response) {
+//                         if(!response || response.status !== 200) {
+//                             return response;
+//                         }
                         
-                        var responseToCache = response.clone();
-                        cache.open(CACHE_NAME)
-                            .then(function(cache) {  
-                                cache.put(event.request, responseToCache)
-                            });
+//                         var responseToCache = response.clone();
+//                         caches.open(CACHE_NAME)
+//                             .then(function(cache) {  
+//                                 cache.put(event.request, responseToCache)
+//                             });
                         
-                        return response;
-                    });
+//                         return response;
+//                     });
+//             })
+//     );
+// });
+
+
+self.addEventListener("fetch", function(event) {
+    var API_URL = "https://api.football-data.org";
+    console.log('fetch sw')
+    if (event.request.url.indexOf(API_URL) > -1) {
+        event.respondWith(
+            caches.open(CACHE_NAME).then(function(cache) {
+                return fetch(event.request).then(function(response) {
+                    console.log('data api dicache')
+                    cache.put(event.request.url, response.clone());
+                    return response;
+                })
             })
-    );
+        );
+    } else {
+        event.respondWith(
+            caches.match(event.request, { ignoreSearch: true }).then(function(response) {
+                return response || fetch (event.request);
+            })
+        )
+    }
 });
 
 

@@ -1,3 +1,5 @@
+import leagueDOM from "../script/league-dom.js";
+
 const baseUrl = "https://api.football-data.org"
 const token = "02c651fbb55e47e18b7702cacefba634";
 
@@ -46,21 +48,47 @@ const errorMessage = message => {
 
 export function fetchStanding(league_id) {
     showPreloader();
-    return fetch(`${baseUrl}/v2/competitions/${league_id}/standings`, {
+    if ('caches' in window) {
+        console.log('masuk if cache in window')
+        caches.match(`${baseUrl}/v2/competitions/${league_id}/standings`, {
+            headers:{
+                'X-Auth-Token' : token
+            }
+        })
+        .then(response => {
+            if(response) {
+                response.json().then(resJson => {
+                    // console.log('masuk return resJson cache')
+                    hidePreloader();
+                    console.log('resJson cache')
+                    leagueDOM(resJson)
+                })
+                .finally(() => {
+                    hidePreloader();
+                })
+            }
+        })
+        .catch(error => {
+            M.toast({html: error})
+        })
+
+    }
+    
+    console.log('masuk otw fetch dari api')
+    fetch(`${baseUrl}/v2/competitions/${league_id}/standings`, {
             headers : {
                 "X-Auth-Token": token
             }
         })
         .then(response => response.json())
-        .then(resJson => resJson)
+        .then(resJson => {
+            // console.log('resJson API')
+            leagueDOM(resJson)
+        })
         .finally(() => {
             hidePreloader();
         })
-        .catch(error => {
-            errorMessage(error);
-            M.toast({html: error});
-            return error
-        })
+
 };
 export function fetchTeam(team_id) {
     showPreloader();
@@ -75,8 +103,6 @@ export function fetchTeam(team_id) {
             hidePreloader();
         })
         .catch(error => {
-            errorMessage(error)
             M.toast({html: error})
-            return error
         })
 };
