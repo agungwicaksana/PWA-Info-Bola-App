@@ -100,7 +100,7 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
                 <a href="#team/${team.team.id}" class="team-detail">
                     <div class="col s12 m10 l8 offset-m1 offset-l2">
                         <div class="team-item waves-effect">
-                            <img src="${urlRplc(team.team.crestUrl)}" alt="Logo ${team.team.name}">
+                            <img src="${urlRplc(team.team.crestUrl)}" alt="Logo ${team.team.name}" onerror="this.onerror=null;this.src='assets/icon.svg'">
                             <div class="team-item-content">
                                 <span class="badge bdg-color-${color}">${team.position}</span>
                                 <span>${team.team.name}</span>
