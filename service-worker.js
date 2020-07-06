@@ -31,64 +31,13 @@ self.addEventListener("install", function(event) {
     );
 });
 
-// Versi 1. Pendaftaran cache seacara manual
-// self.addEventListener("fetch", function(event) {
-//     event.respondWith(
-//         caches.match(event.request)
-//             .then(function(response) {
-//                 console.log("ServiceWorker: Menarik data: ", event.request.url);
-                
-//                 if(response) {
-//                     console.log("ServiceWorker: Gunakan aset dari cache: ", response.url);
-//                     return response;
-//                 }
-
-//                 console.log(
-//                     "ServiceWorker: Memuat aset dari server: ",
-//                     event.request.url
-//                 );       
-//                 return fetch(event.request)
-//             })
-//     )
-// })
-
-// // Versi 2. Pendaftarn cache secara dinamis
-// self.addEventListener("fetch", function(event) {  
-//     event.respondWith(
-//         caches.match(event.request, {cacheName: CACHE_NAME})
-//             .then(function(response) {
-//                 if(response) {
-//                     return response
-//                 }
-
-//                 var fetchRequest = event.request.clone();
-
-//                 return fetch(fetchRequest)
-//                     .then(function (response) {
-//                         if(!response || response.status !== 200) {
-//                             return response;
-//                         }
-                        
-//                         var responseToCache = response.clone();
-//                         caches.open(CACHE_NAME)
-//                             .then(function(cache) {  
-//                                 cache.put(event.request, responseToCache)
-//                             });
-                        
-//                         return response;
-//                     });
-//             })
-//     );
-// });
-
-
 self.addEventListener("fetch", function(event) {
-    var API_URL = "https://api.football-data.org";
+    const API_URL = "https://api.football-data.org/v2/";
     console.log('fetch sw')
     if (event.request.url.indexOf(API_URL) > -1) {
         event.respondWith(
-            caches.open(CACHE_NAME).then(function(cache) {
-                return fetch(event.request).then(function(response) {
+            caches.open(CACHE_NAME).then(async function(cache) {
+                return await fetch(event.request).then(function(response) {
                     console.log('data api dicache')
                     cache.put(event.request.url, response.clone());
                     return response;
@@ -98,13 +47,12 @@ self.addEventListener("fetch", function(event) {
     } else {
         event.respondWith(
             caches.match(event.request, { ignoreSearch: true }).then(function(response) {
+                console.log('data tidak dicache');
                 return response || fetch (event.request);
             })
         )
     }
 });
-
-
 
 self.addEventListener("activate", function(event) {
     console.log('Aktivasi ServiceWorker baru');

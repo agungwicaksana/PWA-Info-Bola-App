@@ -137,8 +137,6 @@ export default function teamDOM(data) {
     `;
     teamHTML += squadContent;
 
-
-
     teamContainer.innerHTML = teamHTML;
     // Init Materialboxed
     const MBoxed = document.querySelectorAll('.materialboxed');
@@ -155,22 +153,22 @@ export default function teamDOM(data) {
         nav.remove();
     });
 
-    // Add saveBtn
     const navWrapper = document.querySelector('.nav-wrapper');
-    const saveBtn = document.createElement('a');
-    saveBtn.classList.add('right')
-    saveBtn.innerHTML = '<i class="rem-23 pt-4 material-icons btn-save">star_border</i>';
-    navWrapper.appendChild(saveBtn);
+    let navWrapperInner = '';
+    
+    // Add saveBtn
+    const saveBtn = `<a class="right"><i class="rem-23 pt-4 material-icons btn-save">star_border</i></a>`;
+    navWrapperInner += saveBtn;
 
     // Move brand logo to center
-    const brandLogo = document.querySelector('.brand-logo');
-    brandLogo.classList.remove('left');
-    brandLogo.classList.add('center');
+    const brandLogo = `<a href="#league-2001" class="brand-logo center">Soccerrr</a>`;
+    navWrapperInner += brandLogo;
 
     // Add backBtn
-    const aTag = document.createElement('a');
-    aTag.innerHTML = '<i class="material-icons left rem-23 pt-4 back-btn">close</i>';
-    navWrapper.appendChild(aTag);
+    const aTag = `<a><i class="material-icons left rem-23 pt-4 back-btn">close</i></a>`
+    navWrapperInner += aTag;
+
+    navWrapper.innerHTML = navWrapperInner;
 
     // Fungsi pada saveBtn
     const btnSave = document.querySelector('.btn-save');

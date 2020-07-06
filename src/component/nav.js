@@ -37,14 +37,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let page = window.location.hash.substr(1);
     
     if (page === "") {
-        page = "league/2001"
-        window.history.pushState('','',`#${page}`);
-        const ivalReload = setInterval(() => {
-            if(window.location.hash === `#${page}`) {
-                location.reload();
-                clearInterval(ivalReload);
-            }
-        }, 50);
+        window.location.href = `${window.location.origin}/#league-2001`;
+        window.location.reload();
     };
     loadPage(page);
     function loadPage(pg) {
