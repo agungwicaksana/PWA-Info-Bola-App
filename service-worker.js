@@ -3,6 +3,7 @@ const urlsToCache = [
     "/",
     "/index.html",
     "/register-sw.js",
+    "/service-worker.js",
     "/node_modules/jquery/dist/jquery.min.js",
     "/node_modules/materialize-css/dist/js/materialize.min.js",
     "/src/component/nav.js",
