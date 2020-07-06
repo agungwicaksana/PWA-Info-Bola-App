@@ -9,7 +9,7 @@
   "author": "Agung Wicaksana",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.5.1",
+    "idb": "^2.1.3",
     "materialize-css": "^1.0.0"
   }
 }
