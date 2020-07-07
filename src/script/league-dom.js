@@ -153,5 +153,4 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
             })
         });
     }
-    customSaveButton();
 }

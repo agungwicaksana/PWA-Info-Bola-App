@@ -1,4 +1,5 @@
 import render from "./content-handler.js";
+import customSaveButton from "./custom-save-btn.js";
 
 export function loadNav(page = '') {
     const xhttp = new XMLHttpRequest();
@@ -8,6 +9,9 @@ export function loadNav(page = '') {
             const targets = '.topnav, .sidenav, #footer-nav';
             document.querySelectorAll(targets).forEach(e => {
                 e.innerHTML = xhttp.responseText;
+                if(e.classList.contains('topnav')) {
+                    customSaveButton()
+                }
             });
 
             document.querySelectorAll(targets).forEach(e => {
