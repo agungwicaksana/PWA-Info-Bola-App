@@ -1,5 +1,6 @@
 import urlRplc from "./url-https.js";
 import render from "./content-handler.js";
+import customSaveButton from "./custom-save-btn.js";
 
 export default function leagueDOM({competition: cp, season: se, standings: st}){
     const time = cp.lastUpdated;
@@ -182,4 +183,5 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
             })
         });
     }
+    customSaveButton();
 }
