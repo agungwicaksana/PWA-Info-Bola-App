@@ -1,10 +1,10 @@
 import urlRplc from "./url-https.js";
+import { loadPage } from "./nav-loader.js";
 
 export default function savedTeams() {  
     console.log('saveddom js')
     getAll().then(teams => {
         console.log('teams',teams)
-
         const container = document.getElementById(`saved-container`);
         let htmlSaved = '';
         const headContent = `
@@ -35,7 +35,6 @@ export default function savedTeams() {
 
         let teamComp = ''; 
         teams.forEach(team => {
-            console.log('team', team)
             teamComp += `
                 <a href="#team/${team.id}" class="team-detail">
                     <div class="col s12 m10 l8 offset-m1 offset-l2">
@@ -57,5 +56,16 @@ export default function savedTeams() {
             `
         });
         document.getElementById('saved-teams-container').innerHTML = teamComp;
+
+        (() => {  
+            const teamsDetailBtn = document.querySelectorAll('.team-detail');
+            teamsDetailBtn.forEach(btn => {
+                btn.addEventListener('click',(e) => {
+                    e.preventDefault();
+                    const teamId = btn.getAttribute('href').substr(1);
+                    loadPage(teamId, true);
+                })
+            });
+        })()
     })
 }

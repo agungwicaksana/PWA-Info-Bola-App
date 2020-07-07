@@ -202,7 +202,7 @@ export default function teamDOM(data) {
             loadPage(prevUrl);
             page = prevUrl;
             console.log('prevUrl',prevUrl)
-            if(prevUrl.substr(0,6) === 'league') {
+            if(prevUrl.substr(0,6) === 'league' || prevUrl.substr(0,5) === 'saved') {
                 // Benerin menu, kembali ke semula
                 navWrapper.innerHTML = `
                     <a href="#league-2001" class="brand-logo left">Soccerrr</a>
