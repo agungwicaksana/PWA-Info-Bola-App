@@ -92,7 +92,6 @@ export function fetchStanding(league_id) {
 };
 export function fetchTeam(team_id) {
     showPreloader();
-
     if ('caches' in window) {
         console.log('masuk if cache in window')
         caches.match(`${baseUrl}/v2/teams/${team_id}`, {
@@ -106,7 +105,7 @@ export function fetchTeam(team_id) {
                     // console.log('masuk return resJson cache')
                     hidePreloader();
                     console.log('resJson cache')
-                    teamDOM(resJson)
+                    teamDOM(resJson);
                 })
                 .finally(() => {
                     hidePreloader();
@@ -125,7 +124,7 @@ export function fetchTeam(team_id) {
         })
         .then(response => response.json())
         .then(resJson => {
-            teamDOM(resJson)
+            teamDOM(resJson);
         })
         .finally(() => {
             hidePreloader();

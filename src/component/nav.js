@@ -1,4 +1,4 @@
-import render from "../script/content-handler.js"
+import render from "../script/content-handler.js";
 
 document.addEventListener("DOMContentLoaded", function() {
     const elems = document.querySelectorAll(".sidenav");
