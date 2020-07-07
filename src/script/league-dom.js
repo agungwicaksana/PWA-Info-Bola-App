@@ -1,6 +1,6 @@
 import urlRplc from "./url-https.js";
-import render from "./content-handler.js";
 import customSaveButton from "./custom-save-btn.js";
+import { loadPage } from "./nav-loader.js";
 
 export default function leagueDOM({competition: cp, season: se, standings: st}){
     const time = cp.lastUpdated;
@@ -143,43 +143,13 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
     // onPageLoaded
     groupDOM(groupList[0])
 
-    // Add page redirect on team card
-    function loadPage(pg) {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState === 4) {
-                const content = document.querySelector("#main-content");
-                if (this.status === 200) {
-                    content.innerHTML = xhttp.responseText;
-                    render(pg);
-                    window.history.pushState('','',`#${pg}`);
-                } else if (this.status === 403) {
-                    document.innerHTML = showError('Anda Dilarang Mengakses Halaman Ini');
-                } else if (this.status === 404) {
-                    content.innerHTML = showError('Halaman Tidak Ditemukan');
-                } else {
-                    content.innerHTML = showError('Halaman Tidak Dapat Diakses');
-                }
-            }
-        };
-        let page;
-        if(pg.slice(0,6) === 'league') { 
-            page = 'league';
-        } else if(pg.slice(0,4) === 'team') {
-            page = 'team';
-        };
-        xhttp.open("GET", "src/html/" + page + ".html", true);
-        xhttp.send();
-    };
-
     function teamEventListener() {  
         const teamsDetailBtn = document.querySelectorAll('.team-detail');
         teamsDetailBtn.forEach(btn => {
             btn.addEventListener('click',(e) => {
                 e.preventDefault();
                 const teamId = btn.getAttribute('href').substr(1);
-                // console.log(teamId)
-                loadPage(teamId)
+                loadPage(teamId, true)
             })
         });
     }

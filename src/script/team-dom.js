@@ -1,5 +1,5 @@
 import urlRplc from "./url-https.js";
-import render from "./content-handler.js"
+import { loadPage, loadNav } from "./nav-loader.js";
 
 export default function teamDOM(data) {
     const { id, name, shortName, tla,
@@ -199,8 +199,9 @@ export default function teamDOM(data) {
             if(prevUrl.substr(0,4) !== 'team') {
                 clearInterval(backPageInt);
             };
-            loadPage(prevUrl,prevUrl);
+            loadPage(prevUrl);
             page = prevUrl;
+            console.log('prevUrl',prevUrl)
             if(prevUrl.substr(0,6) === 'league') {
                 // Benerin menu, kembali ke semula
                 navWrapper.innerHTML = `
@@ -209,60 +210,8 @@ export default function teamDOM(data) {
                     <ul class="topnav right hide-on-med-and-down">
                     </ul>
                 `;
-                loadNav(page);
+                loadNav(prevUrl);
             };
         }, 50);
     })
-
-    function loadNav(page) {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState === 4) {
-                if (this.status !== 200) return;
-                const targets = '.topnav, .sidenav, #footer-nav';
-                document.querySelectorAll(targets).forEach(e => {
-                    e.innerHTML = xhttp.responseText;
-                });
-
-                document.querySelectorAll(targets).forEach(e => {
-                    e.addEventListener("click", event => {
-                        event.preventDefault()
-                        const sidenav = document.querySelector('.sidenav');
-                        M.Sidenav.getInstance(sidenav).close();
-                        page = event.target.getAttribute("href").substr(1);
-                        loadPage(page, page);
-                        window.history.pushState('','',`#${page}`);
-                    })
-                })
-            }
-        };
-        xhttp.open("GET", "src/html/nav.html", true);
-        xhttp.send();
-    };
-
-    function loadPage(pg, page) {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState === 4) {
-                const content = document.querySelector("#main-content");
-                if (this.status === 200) {
-                    content.innerHTML = xhttp.responseText;
-                    render(page);
-                } else if (this.status === 403) {
-                    document.innerHTML = showError('Anda Dilarang Mengakses Halaman Ini');
-                } else if (this.status === 404) {
-                    content.innerHTML = showError('Halaman Tidak Ditemukan');
-                } else {
-                    content.innerHTML = showError('Halaman Tidak Dapat Diakses');
-                }
-            }
-        };
-        if(pg.slice(0,6) === 'league') { 
-            pg = 'league';
-        } else if(pg.slice(0,4) === 'team') {
-            pg = 'team';
-        };
-        xhttp.open("GET", "src/html/" + pg + ".html", true);
-        xhttp.send();
-    };
 }
