@@ -184,3 +184,10 @@ img.materialboxed {
     cursor: pointer;
     color: #039be5;
 }
+
+/* saved team */
+.saved-teams {
+    padding-left: 15px;
+    padding-right: 15px;
+    cursor: pointer;
+}

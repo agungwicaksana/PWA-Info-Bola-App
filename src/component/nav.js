@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (this.status === 200) {
                     content.innerHTML = xhttp.responseText;
                     render(page);
+                    customSaveButton();
                 } else if (this.status === 403) {
                     document.innerHTML = showError('Anda Dilarang Mengakses Halaman Ini');
                 } else if (this.status === 404) {
@@ -76,5 +77,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             </div>
         `)
+    }
+
+    // Custom save button
+    function customSaveButton() {
+        const topNav = document.querySelector('.topnav');
+        topNav.lastElementChild.innerHTML = `<i href="#saved" class="material-icons saved-teams waves-effect">save</i>`
     }
 });

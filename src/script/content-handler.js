@@ -1,4 +1,5 @@
-import {fetchStanding, fetchTeam} from "../data/standings-api.js"
+import {fetchStanding, fetchTeam} from "../data/standings-api.js";
+import savedTeams from "./saved-dom.js";
 import leagueDOM from "./league-dom.js";
 import teamDOM from "./team-dom.js"
 
@@ -10,6 +11,7 @@ export default async function render(page) {
     } else if(page.substr(0,4) === 'team') {
         data = await fetchTeam(page.substr(5,page.length))
         // teamDOM(data)
+    } else if(page.substr(0,5) === 'saved') {
+        savedTeams()
     }
-    // console.log('page',page.substr(5,page.length))
 }
