@@ -51,7 +51,7 @@ export function fetchStanding(league_id) {
     showPreloader();
     new Promise(function (resolve, reject) {
         if ('caches' in window) {
-            console.log('masuk if cache in window')
+            // console.log('masuk if cache in window')
             caches.match(`${baseUrl}/v2/competitions/${league_id}/standings`, {
                 headers:{
                     'X-Auth-Token' : token
@@ -76,7 +76,7 @@ export function fetchStanding(league_id) {
             })
         }
         
-        console.log('masuk otw fetch dari api')
+        // console.log('masuk otw fetch dari api')
         fetch(`${baseUrl}/v2/competitions/${league_id}/standings`, {
                 headers : {
                     "X-Auth-Token": token
@@ -109,7 +109,7 @@ export function fetchTeam(team_id) {
             })
         }
         if ('caches' in window) {
-            console.log('masuk if cache in window')
+            // console.log('masuk if cache in window')
             caches.match(`${baseUrl}/v2/teams/${team_id}`, {
                 headers:{
                     'X-Auth-Token' : token
