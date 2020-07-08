@@ -25,7 +25,7 @@ export default function savedTeams() {
 
         const savedTeamsContainer = `
             <div class="container">
-                <div class="row" id="saved-teams-container">
+                <div class="row pt20" id="saved-teams-container">
                 </div>
             </div>
         `;
