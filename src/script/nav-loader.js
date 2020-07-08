@@ -22,7 +22,7 @@ export function loadNav(page = '') {
 
                     page = event.target.getAttribute("href").substr(1);
                     loadPage(page);
-                    console.log('page',page)
+                    // console.log('page',page)
                     window.history.pushState('','',`#${page}`);
                 })
             })

@@ -49,84 +49,106 @@ const errorMessage = message => {
 
 export function fetchStanding(league_id) {
     showPreloader();
-    if ('caches' in window) {
-        console.log('masuk if cache in window')
-        caches.match(`${baseUrl}/v2/competitions/${league_id}/standings`, {
-            headers:{
-                'X-Auth-Token' : token
-            }
-        })
-        .then(response => {
-            if(response) {
-                response.json().then(resJson => {
-                    // console.log('masuk return resJson cache')
-                    hidePreloader();
-                    console.log('resJson cache')
-                    leagueDOM(resJson)
-                })
-                .finally(() => {
-                    hidePreloader();
-                })
-            }
-        })
-        .catch(error => {
-            M.toast({html: error})
-        })
-    }
-    
-    console.log('masuk otw fetch dari api')
-    fetch(`${baseUrl}/v2/competitions/${league_id}/standings`, {
-            headers : {
-                "X-Auth-Token": token
-            }
-        })
-        .then(response => response.json())
-        .then(resJson => {
-            // console.log('resJson API')
-            leagueDOM(resJson)
-        })
-        .finally(() => {
-            hidePreloader();
-        })
-
+    new Promise(function (resolve, reject) {
+        if ('caches' in window) {
+            console.log('masuk if cache in window')
+            caches.match(`${baseUrl}/v2/competitions/${league_id}/standings`, {
+                headers:{
+                    'X-Auth-Token' : token
+                }
+            })
+            .then(response => {
+                if(response) {
+                    response.json().then(resJson => {
+                        // console.log('masuk return resJson cache')
+                        hidePreloader();
+                        console.log('resJson cache')
+                        leagueDOM(resJson);
+                        resolve(resJson);
+                    })
+                    .finally(() => {
+                        hidePreloader();
+                    })
+                }
+            })
+            .catch(error => {
+                M.toast({html: error})
+            })
+        }
+        
+        console.log('masuk otw fetch dari api')
+        fetch(`${baseUrl}/v2/competitions/${league_id}/standings`, {
+                headers : {
+                    "X-Auth-Token": token
+                }
+            })
+            .then(response => response.json())
+            .then(resJson => {
+                // console.log('resJson API')
+                leagueDOM(resJson);
+                resolve(resJson);
+            })
+            .finally(() => {
+                hidePreloader();
+            })
+            .catch(error => {
+                M.toast({html: error})
+            })
+    })
 };
 export function fetchTeam(team_id) {
     showPreloader();
-    if ('caches' in window) {
-        console.log('masuk if cache in window')
-        caches.match(`${baseUrl}/v2/teams/${team_id}`, {
-            headers:{
-                'X-Auth-Token' : token
-            }
-        })
-        .then(response => {
-            if(response) {
-                response.json().then(resJson => {
-                    // console.log('masuk return resJson cache')
-                    hidePreloader();
-                    console.log('resJson cache')
-                    teamDOM(resJson);
-                })
-                .finally(() => {
-                    hidePreloader();
-                })
-            }
-        })
-        .catch(error => {
-            M.toast({html: error})
-        })
-    }
+    new Promise(function (resolve, reject) {
+        // console.log('hash', location.hash)
+        // console.log('getbyid', getById(parseInt(team_id)))
+        if(location.hash === '#saved') {
+            getById(parseInt(team_id)).then(data => {
+                hidePreloader();
+                teamDOM(data);
+                resolve(data);
+            })
+        }
+        if ('caches' in window) {
+            console.log('masuk if cache in window')
+            caches.match(`${baseUrl}/v2/teams/${team_id}`, {
+                headers:{
+                    'X-Auth-Token' : token
+                }
+            })
+            .then(response => {
+                if(response) {
+                    response.json().then(resJson => {
+                        // console.log('masuk return resJson cache')
+                        hidePreloader();
+                        console.log('resJson cache')
+                        teamDOM(resJson);
+                        resolve(resJson);
+                    })
+                    .finally(() => {
+                        hidePreloader();
+                    })
+                }
+            })
+            .catch(error => {
+                M.toast({html: error})
+            })
+        }
 
-    fetch(`${baseUrl}/v2/teams/${team_id}`, {
-            headers : {
-                "X-Auth-Token": token
-            }
-        })
-        .then(response => response.json())
-        .then(resJson => {
-            teamDOM(resJson);
-        })
-        .finally(() => {
-            hidePreloader();
-        })
+        fetch(`${baseUrl}/v2/teams/${team_id}`, {
+                headers : {
+                    "X-Auth-Token": token
+                }
+            })
+            .then(response => response.json())
+            .then(resJson => {
+                teamDOM(resJson);
+                resolve(resJson);
+            })
+            .finally(() => {
+                hidePreloader();
+            })
+            .catch(error => {
+                M.toast({html: error})
+            })
+    })
 };

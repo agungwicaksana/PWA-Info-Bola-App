@@ -2,9 +2,9 @@ import urlRplc from "./url-https.js";
 import { loadPage } from "./nav-loader.js";
 
 export default function savedTeams() {  
-    console.log('saveddom js')
+    // console.log('saveddom js')
     getAll().then(teams => {
-        console.log('teams',teams)
+        // console.log('teams',teams)
         const container = document.getElementById(`saved-container`);
         let htmlSaved = '';
         const headContent = `
