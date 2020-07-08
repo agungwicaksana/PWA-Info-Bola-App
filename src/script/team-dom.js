@@ -170,8 +170,15 @@ export default function teamDOM(data) {
 
     navWrapper.innerHTML = navWrapperInner;
 
-    // Fungsi pada saveBtn
+    // Cek apakah tim sudah disimpan di idb
     const btnSave = document.querySelector('.btn-save');
+    getById(parseInt(id)).then(dataIdb => {
+        if(dataIdb) {
+            btnSave.innerHTML = 'star';
+        };
+    })
+
+    // Fungsi pada saveBtn
     btnSave.addEventListener('click', e => {
         e.preventDefault();
         if(btnSave.innerHTML === 'star_border') {
