@@ -8,7 +8,7 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
     const container = document.getElementById(`league-container`);
     let html = '';
     const headContent = `
-        <div class="light-blue darken-3">
+        <div class="light-blue darken-3 br-right">
             <div class="container pb10">
                 <div class="row white-text right-align s-center-align">
                     <div class="col s12">

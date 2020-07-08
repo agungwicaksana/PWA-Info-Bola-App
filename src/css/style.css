@@ -191,3 +191,17 @@ img.materialboxed {
     padding-right: 15px;
     cursor: pointer;
 }
+
+/* Border radius */
+.br-right {
+    border-bottom-right-radius: 60px;
+}
+
+@media (max-width: 600px) {
+    .br-right {
+        border-bottom-right-radius: 40px;
+    }
+    .br-right-top {
+        border-top-right-radius: 40px;
+    }
+}

@@ -11,7 +11,7 @@ export default function teamDOM(data) {
     let teamHTML = '';
     
     const headContent = `
-        <div class="light-blue darken-3 white-text">
+        <div class="light-blue darken-3 white-text br-right">
             <div class="container">
                 <div class="row pb10">
                     <div class="col s8 m6 l4 offset-s2 logo-col">
