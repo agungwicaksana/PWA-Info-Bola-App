@@ -40,8 +40,8 @@ self.addEventListener("install", function(event) {
 
 self.addEventListener("fetch", function(event) {
     const API_URL = "https://api.football-data.org/v2/";
-    console.log('fetch sw')
-    console.log('event.request.url',event.request.url)
+    // console.log('fetch sw')
+    // console.log('event.request.url',event.request.url)
     if (event.request.url.indexOf(API_URL) > -1) {
         event.respondWith(
             caches.open(CACHE_NAME).then(async function(cache) {
