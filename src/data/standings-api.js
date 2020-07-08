@@ -105,7 +105,7 @@ export function fetchTeam(team_id) {
             getById(parseInt(team_id)).then(data => {
                 hidePreloader();
                 teamDOM(data);
-                resolve(data);
+                returnresolve(data);
             })
         }
         if ('caches' in window) {
@@ -122,7 +122,7 @@ export function fetchTeam(team_id) {
                         hidePreloader();
                         console.log('resJson cache')
                         teamDOM(resJson);
-                        resolve(resJson);
+                        return resolve(resJson);
                     })
                     .finally(() => {
                         hidePreloader();
@@ -142,7 +142,7 @@ export function fetchTeam(team_id) {
             .then(response => response.json())
             .then(resJson => {
                 teamDOM(resJson);
-                resolve(resJson);
+                return resolve(resJson);
             })
             .finally(() => {
                 hidePreloader();
