@@ -24,7 +24,7 @@ const urlsToCache = [
     "/src/script/saved-dom.js",
     "/src/script/team-dom.js",
     "/src/script/url-https.js",
-    "https://fonts.googleapis.com/icon?family=Material+Icons"
+    "https://fonts.googleapis.com/icon?family=Material+Icons",
 ];
 
 self.addEventListener("install", function(event) {
@@ -40,12 +40,13 @@ self.addEventListener("install", function(event) {
 
 self.addEventListener("fetch", function(event) {
     const API_URL = "https://api.football-data.org/v2/";
-    // console.log('fetch sw')
+    console.log('fetch sw')
+    console.log('event.request.url',event.request.url)
     if (event.request.url.indexOf(API_URL) > -1) {
         event.respondWith(
             caches.open(CACHE_NAME).then(async function(cache) {
                 return await fetch(event.request).then(function(response) {
-                    // console.log('data api dicache')
+                    console.log('data api dicache')
                     cache.put(event.request.url, response.clone());
                     return response;
                 })
@@ -54,7 +55,7 @@ self.addEventListener("fetch", function(event) {
     } else {
         event.respondWith(
             caches.match(event.request, { ignoreSearch: true }).then(function(response) {
-                // console.log('data tidak dicache');
+                console.log('data tidak dicache');
                 return response || fetch (event.request);
             })
         )

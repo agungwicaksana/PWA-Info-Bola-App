@@ -62,7 +62,7 @@ export function fetchStanding(league_id) {
                     response.json().then(resJson => {
                         // console.log('masuk return resJson cache')
                         hidePreloader();
-                        console.log('resJson cache')
+                        console.log('load league menggunakan cache')
                         leagueDOM(resJson);
                         resolve(resJson);
                     })
@@ -84,9 +84,9 @@ export function fetchStanding(league_id) {
             })
             .then(response => response.json())
             .then(resJson => {
-                // console.log('resJson API')
+                console.log('load league menggunakan API')
                 leagueDOM(resJson);
-                resolve(resJson);
+                return resolve(resJson);
             })
             .finally(() => {
                 hidePreloader();
