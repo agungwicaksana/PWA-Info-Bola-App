@@ -6,6 +6,9 @@ const urlsToCache = [
     "/register-sw.js",
     "/service-worker.js",
     "/assets/icon.svg",
+    "/assets/icon-72.svg",
+    "/assets/icon-192.svg",
+    "/assets/icon-512.svg",
     "/node_modules/idb/lib/idb.js",
     "/node_modules/materialize-css/dist/js/materialize.min.js",
     "/src/component/nav.js",
@@ -23,6 +26,7 @@ const urlsToCache = [
     "/src/script/nav-loader.js",
     "/src/script/saved-dom.js",
     "/src/script/team-dom.js",
+    "/src/script/uint8AConverter.js",
     "/src/script/url-https.js",
     "https://fonts.googleapis.com/icon?family=Material+Icons",
 ];
