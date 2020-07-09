@@ -24,8 +24,8 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
                         </div>
                     </div>
                     <div class="col s12 l10 left-align left">
-                        <p class="info"><b>Updated:</b> ${time.substring(0,10)} at ${time.substring(11,16)} UTC</p>
-                        <p class="info"><b>Event Ends:</b> ${se.endDate}</p>
+                        <p class="info"><b>Update Terakhir:</b> ${time.substring(0,10)} at ${time.substring(11,16)} UTC</p>
+                        <p class="info"><b>Event Berakhir:</b> ${se.endDate}</p>
                     </div>
                 </div>
             </div>
@@ -108,16 +108,13 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
                                 <hr/>
                                 <div>
                                     <span class="stat teal-text">
-                                        ${team.playedGames}<span> Games</span>
-                                    </span>
-                                    <span class="stat teal-text">
-                                        ${team.won}<span> Won</span>
+                                        ${team.won}<span> Menang</span>
                                     </span>
                                     <span class="stat orange-text">
-                                        ${team.draw}<span> Draw</span>
+                                        ${team.draw}<span> Seri</span>
                                     </span>
                                     <span class="stat red-text">
-                                        ${team.lost}<span> Lost</span>
+                                        ${team.lost}<span> Kalah</span>
                                     </span>
                                     <span class="stat badge black-text">
                                         ${team.points}<span>pts</span>

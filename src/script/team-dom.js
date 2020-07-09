@@ -51,7 +51,7 @@ export default function teamDOM(data) {
             </div>
             <div class="row my0">
                 <div class="col s4 m10 l4 offset-m1 offset-l2">
-                    Founded
+                    Didirikan
                 </div>
                 <div class="col s8 m6 l4 right-align">
                     ${founded}
@@ -83,7 +83,7 @@ export default function teamDOM(data) {
             </div>
             <div class="row my0">
                 <div class="col s4 m10 l4 offset-m1 offset-l2">
-                    Last Update
+                    Update Terakhir
                 </div>
                 <div class="col s8 m6 l4 right-align">
                     ${lastUpdated.substring(0,10)} at ${lastUpdated.substring(11,16)} UTC
@@ -122,9 +122,9 @@ export default function teamDOM(data) {
                         <thead>
                             <tr>
                                 <th class="center-align">#</th>
-                                <th>Name</th>
+                                <th>Nama</th>
                                 <th>Pos</th>
-                                <th>Nat</th>
+                                <th>WN</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -143,9 +143,12 @@ export default function teamDOM(data) {
     M.Materialbox.init(MBoxed);
 
     // adjust DOM
-    const logoCol = document.querySelector('.logo-col');
-    const teamDetail = document.querySelector('.team-detail');
-    teamDetail.style.minHeight = `${logoCol.offsetHeight}px`;
+    const width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    if (width > 600) {
+        const logoCol = document.querySelector('.logo-col');
+        const teamDetail = document.querySelector('.team-detail');
+        teamDetail.style.minHeight = `${logoCol.offsetHeight}px`;
+    };
 
     // Change navbar to Empty
     const navbarTeam = document.querySelectorAll('.topnav, .sidenav-trigger');
