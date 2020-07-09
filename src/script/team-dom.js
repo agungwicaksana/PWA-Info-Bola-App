@@ -15,7 +15,7 @@ export default function teamDOM(data) {
             <div class="container">
                 <div class="row pb10">
                     <div class="col s8 m6 l4 offset-s2 logo-col">
-                        <img class="materialboxed mt40 mb10" width="100%" src="${urlRplc((logo))}" onerror="this.onerror=null;this.src='assets/icon.svg'">
+                        <img class="materialboxed mt40 mb10" width="100%" src="${urlRplc((logo))}" onerror="this.onerror=null;this.src='assets/icon.svg'" alt="Logo ${shortName}">
                     </div>
                     <div class="col s12 m6 l8 mt20">
                         <div class="team-detail right-align s-center-align">

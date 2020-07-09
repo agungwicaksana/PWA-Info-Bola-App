@@ -2,7 +2,7 @@ const dbPromised = idb.open("team-league", 1, upgradeDb => {
     const teamsObjectStore = upgradeDb.createObjectStore("teams", {
         keyPath: "id"
     });
-    teamsObjectStore.createIndex("team_id", "team_id", {unique: false});
+    teamsObjectStore.createIndex("team_id", "team_id", {unique: true});
 });
 
 function saveForLater(team) {  
