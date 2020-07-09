@@ -105,7 +105,7 @@ export function fetchTeam(team_id) {
             getById(parseInt(team_id)).then(data => {
                 hidePreloader();
                 teamDOM(data);
-                returnresolve(data);
+                return resolve(data);
             })
         }
         if ('caches' in window) {
