@@ -49,7 +49,7 @@ const errorMessage = message => {
 
 export function fetchStanding(league_id) {
     showPreloader();
-    new Promise(function (resolve, reject) {
+    new Promise(resolve => {
         if ('caches' in window) {
             caches.match(`${baseUrl}/v2/competitions/${league_id}/standings`, {
                 headers:{
@@ -93,7 +93,7 @@ export function fetchStanding(league_id) {
 };
 export function fetchTeam(team_id) {
     showPreloader();
-    new Promise(function (resolve, reject) {
+    new Promise(resolve => {
         if(location.hash === '#saved') {
             getById(parseInt(team_id)).then(data => {
                 hidePreloader();

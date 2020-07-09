@@ -1,4 +1,4 @@
-const dbPromised = idb.open("team-league", 1, function (upgradeDb) {  
+const dbPromised = idb.open("team-league", 1, upgradeDb => {  
     const teamsObjectStore = upgradeDb.createObjectStore("teams", {
         keyPath: "id"
     });
@@ -7,52 +7,52 @@ const dbPromised = idb.open("team-league", 1, function (upgradeDb) {
 
 function saveForLater(team) {  
     dbPromised
-        .then(function(db) {
+        .then(db => {
             const tx = db.transaction("teams", "readwrite");
             const store = tx.objectStore("teams");
             store.add(team);
             return tx.complete;
         })
-        .then(function() {
+        .then(() => {
             console.log("Team berhasil disimpan");
         })
 }
 
 function deleteSaved(team) {  
     dbPromised
-        .then(function(db) {
+        .then(db => {
             const tx = db.transaction("teams", "readwrite");
             const store = tx.objectStore("teams");
             store.delete(team.id);
             return tx.complete;
-        }).then(function() {
+        }).then(() => {
             console.log('Team dihapus');
         });
 }
 
 function getAll() {  
-    return new Promise (function (resolve, reject) {  
+    return new Promise (resolve => {  
         dbPromised
-            .then(function(db) {  
+            .then(db => {  
                 const tx = db.transaction("teams", "readonly");
                 const store = tx.objectStore("teams");
                 return store.getAll();
             })
-            .then(function (teams) {  
+            .then(teams => {  
                 resolve(teams)
             })
     })
 }
 
 function getById(team_id) {  
-    return new Promise(function (resolve, reject) {  
+    return new Promise(resolve => {  
         dbPromised
-            .then(function (db) {  
+            .then(db => {  
                 const tx = db.transaction("teams", "readonly");
                 const store = tx.objectStore("teams");
                 return store.get(team_id);
             })
-            .then(function (team) {  
+            .then(team => {  
                 resolve(team)
             })
     })
