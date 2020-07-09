@@ -1,5 +1,4 @@
 import urlRplc from "./url-https.js";
-import customSaveButton from "./custom-save-btn.js";
 import { loadPage } from "./nav-loader.js";
 
 export default function leagueDOM({competition: cp, season: se, standings: st}){
@@ -66,10 +65,7 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
     `;
     html += group;
 
-    container.innerHTML = html
-    // console.log('cp', cp);
-    // console.log('se', se);
-    // console.log('st', st);
+    container.innerHTML = html;
     
     const groupLinks = document.querySelectorAll('.group-link');
     groupLinks.forEach(link => {
@@ -90,7 +86,6 @@ export default function leagueDOM({competition: cp, season: se, standings: st}){
 
     function groupDOM(group) {  
         const teamsContainer = document.getElementById('teams-container');
-        // console.log('group', group)
         let teams = '';
         group.table.forEach(team => {
             let color = team.position;

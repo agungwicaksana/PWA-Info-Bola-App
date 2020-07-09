@@ -51,7 +51,6 @@ export function fetchStanding(league_id) {
     showPreloader();
     new Promise(function (resolve, reject) {
         if ('caches' in window) {
-            // console.log('masuk if cache in window')
             caches.match(`${baseUrl}/v2/competitions/${league_id}/standings`, {
                 headers:{
                     'X-Auth-Token' : token
@@ -60,11 +59,9 @@ export function fetchStanding(league_id) {
             .then(response => {
                 if(response) {
                     response.json().then(resJson => {
-                        // console.log('masuk return resJson cache')
                         hidePreloader();
-                        console.log('load league menggunakan cache')
                         leagueDOM(resJson);
-                        resolve(resJson);
+                        return resolve(resJson);
                     })
                     .finally(() => {
                         hidePreloader();
@@ -76,7 +73,6 @@ export function fetchStanding(league_id) {
             })
         }
         
-        // console.log('masuk otw fetch dari api')
         fetch(`${baseUrl}/v2/competitions/${league_id}/standings`, {
                 headers : {
                     "X-Auth-Token": token
@@ -84,7 +80,6 @@ export function fetchStanding(league_id) {
             })
             .then(response => response.json())
             .then(resJson => {
-                console.log('load league menggunakan API')
                 leagueDOM(resJson);
                 return resolve(resJson);
             })
@@ -99,8 +94,6 @@ export function fetchStanding(league_id) {
 export function fetchTeam(team_id) {
     showPreloader();
     new Promise(function (resolve, reject) {
-        // console.log('hash', location.hash)
-        // console.log('getbyid', getById(parseInt(team_id)))
         if(location.hash === '#saved') {
             getById(parseInt(team_id)).then(data => {
                 hidePreloader();
@@ -109,7 +102,6 @@ export function fetchTeam(team_id) {
             })
         }
         if ('caches' in window) {
-            // console.log('masuk if cache in window')
             caches.match(`${baseUrl}/v2/teams/${team_id}`, {
                 headers:{
                     'X-Auth-Token' : token
@@ -118,9 +110,7 @@ export function fetchTeam(team_id) {
             .then(response => {
                 if(response) {
                     response.json().then(resJson => {
-                        // console.log('masuk return resJson cache')
                         hidePreloader();
-                        console.log('resJson cache')
                         teamDOM(resJson);
                         return resolve(resJson);
                     })

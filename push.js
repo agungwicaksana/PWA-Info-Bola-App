@@ -1,4 +1,4 @@
-var webPush = require('web-push');
+const webPush = require('web-push');
  
 const vapidKeys = {
     "publicKey": "BOMAy8Ecr-5g8ud64Bwl4rh89FuaQs34VLKpHMc2AJG31IWgoKOrcYBL8eL34h_VN_k5CPdbFQsdwxitpEl4naU",
@@ -11,16 +11,16 @@ webPush.setVapidDetails(
     vapidKeys.publicKey,
     vapidKeys.privateKey
 )
-var pushSubscription = {
+const pushSubscription = {
     "endpoint": "endpoint",
     "keys": {
         "p256dh": "p256dh",
         "auth": "authKey"
     }
 };
-var payload = 'Selamat! Aplikasi Anda sudah dapat menerima push notifikasi!';
+const payload = 'Ini Notifikasi dari FCM!';
  
-var options = {
+const options = {
     gcmAPIKey: '190164785437',
     TTL: 60
 };

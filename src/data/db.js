@@ -1,5 +1,5 @@
-var dbPromised = idb.open("team-league", 1, function (upgradeDb) {  
-    var teamsObjectStore = upgradeDb.createObjectStore("teams", {
+const dbPromised = idb.open("team-league", 1, function (upgradeDb) {  
+    const teamsObjectStore = upgradeDb.createObjectStore("teams", {
         keyPath: "id"
     });
     teamsObjectStore.createIndex("team_id", "team_id", {unique: false});
@@ -8,8 +8,8 @@ var dbPromised = idb.open("team-league", 1, function (upgradeDb) {
 function saveForLater(team) {  
     dbPromised
         .then(function(db) {
-            var tx = db.transaction("teams", "readwrite");
-            var store = tx.objectStore("teams");
+            const tx = db.transaction("teams", "readwrite");
+            const store = tx.objectStore("teams");
             store.add(team);
             return tx.complete;
         })
@@ -21,8 +21,8 @@ function saveForLater(team) {
 function deleteSaved(team) {  
     dbPromised
         .then(function(db) {
-            var tx = db.transaction("teams", "readwrite");
-            var store = tx.objectStore("teams");
+            const tx = db.transaction("teams", "readwrite");
+            const store = tx.objectStore("teams");
             store.delete(team.id);
             return tx.complete;
         }).then(function() {
@@ -34,8 +34,8 @@ function getAll() {
     return new Promise (function (resolve, reject) {  
         dbPromised
             .then(function(db) {  
-                var tx = db.transaction("teams", "readonly");
-                var store = tx.objectStore("teams");
+                const tx = db.transaction("teams", "readonly");
+                const store = tx.objectStore("teams");
                 return store.getAll();
             })
             .then(function (teams) {  
@@ -48,8 +48,8 @@ function getById(team_id) {
     return new Promise(function (resolve, reject) {  
         dbPromised
             .then(function (db) {  
-                var tx = db.transaction("teams", "readonly");
-                var store = tx.objectStore("teams");
+                const tx = db.transaction("teams", "readonly");
+                const store = tx.objectStore("teams");
                 return store.get(team_id);
             })
             .then(function (team) {  

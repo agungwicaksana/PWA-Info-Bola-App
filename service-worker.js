@@ -28,11 +28,8 @@ const urlsToCache = [
 ];
 
 self.addEventListener("install", function(event) {
-    // console.log("ServiceWorker: Menginstall..");
-    
     event.waitUntil(
         caches.open(CACHE_NAME).then(function(cache) {
-            // console.log("ServiceWorker: Membuka cache..");
             return cache.addAll(urlsToCache);
         })
     );
@@ -40,13 +37,10 @@ self.addEventListener("install", function(event) {
 
 self.addEventListener("fetch", function(event) {
     const API_URL = "https://api.football-data.org/v2/";
-    // console.log('fetch sw')
-    // console.log('event.request.url',event.request.url)
     if (event.request.url.indexOf(API_URL) > -1) {
         event.respondWith(
             caches.open(CACHE_NAME).then(async function(cache) {
                 return await fetch(event.request).then(function(response) {
-                    console.log('data api dicache')
                     cache.put(event.request.url, response.clone());
                     return response;
                 })
@@ -55,7 +49,6 @@ self.addEventListener("fetch", function(event) {
     } else {
         event.respondWith(
             caches.match(event.request, { ignoreSearch: true }).then(function(response) {
-                console.log('data tidak dicache');
                 return response || fetch (event.request);
             })
         )
@@ -63,8 +56,6 @@ self.addEventListener("fetch", function(event) {
 });
 
 self.addEventListener("activate", function(event) {
-    // console.log('Aktivasi ServiceWorker baru');
-    
     event.waitUntil(
         caches.keys().then(function(cacheNames) {  
             return Promise.all(

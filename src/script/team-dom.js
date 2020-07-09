@@ -211,7 +211,6 @@ export default function teamDOM(data) {
             };
             loadPage(prevUrl);
             page = prevUrl;
-            // console.log('prevUrl',prevUrl)
             if(prevUrl.substr(0,6) === 'league' || prevUrl.substr(0,5) === 'saved') {
                 // Benerin menu, kembali ke semula
                 navWrapper.innerHTML = `
